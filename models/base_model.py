@@ -31,7 +31,7 @@ class BaseModel:
         to_dict: Return a dictionary representation of the BaseModel object.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initialize a new instance of the BaseModel.
 
@@ -40,9 +40,18 @@ class BaseModel:
             created_at (datetime.datetime): The timestamp when the object was created.
             updated_at (datetime.datetime): The timestamp when the object was last updated.
         """
-        self.id = uuid.uuid4()
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
+        if not kwargs:
+            self.id = uuid.uuid4()
+            self.created_at = datetime.datetime.now()
+            self.updated_at = self.created_at
+        else:
+            for key, val in kwargs.items():
+                if key in ("updated_at", "created_at"):
+                    self.__dict__[key] = datetime.strptime(val, "%Y-%m-%d %H:%M:%S")
+                elif key == "id":
+                    self.__dict__[key] = str(val)
+                else:
+                    self.__dict__[key] = val
 
     def __str__(self):
         """
@@ -77,4 +86,3 @@ class BaseModel:
         data_dict['created_at'] = data_dict['created_at'].isoformat()
         data_dict['updated_at'] = data_dict['updated_at'].isoformat()
         return data_dict
-
