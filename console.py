@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
        <class>.update(<id>, <dictionary>)
-        Update a class instance of a given id by adding or updating
+        Update a class instance a given id by adding or updating
         a given attribute key/value pair or dictionary."""
         argl = parse(arg)
         objdict = storage.all()
@@ -208,4 +208,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
-
