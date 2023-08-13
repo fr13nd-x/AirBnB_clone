@@ -36,7 +36,7 @@ class BaseModel:
         Initialize a new instance of the BaseModel.
 
         Attributes:
-            id (uuid.UUID): The unique identifier (UUID) for the object.
+            id (uuid.UUID):- The unique identifier (UUID) for the object.
             created_at (datetime.datetime): The timestamp when the object was created.
             updated_at (datetime.datetime): The timestamp when the object was last updated.
         """
