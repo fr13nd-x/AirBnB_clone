@@ -12,7 +12,7 @@ Usage:
     obj.save()
     data_dict = obj.to_dict()
 """
-
+import models
 import datetime
 import uuid
 
@@ -44,6 +44,7 @@ class BaseModel:
             self.id = uuid.uuid4()
             self.created_at = datetime.datetime.now()
             self.updated_at = self.created_at
+            models.storage.new(self)
         else:
             for key, val in kwargs.items():
                 if key in ("updated_at", "created_at"):
@@ -71,6 +72,7 @@ class BaseModel:
         indicating that the object has been recently updated.
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
